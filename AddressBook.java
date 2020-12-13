@@ -23,7 +23,7 @@ public class AddressBook {
         addressBook.personList.add(person);
         person = new Person("Shreya","Shreeshail","Pune","MH","40051","989"); 
         addressBook.personList.add(person);
-        person = new Person("Uzair","Chhapra","Thane","MH","40051","989"); 
+        person = new Person("Uzair","Chhapra","Bhusawal","MH","40051","989"); 
         addressBook.personList.add(person);
         
         do {
@@ -33,6 +33,7 @@ public class AddressBook {
         	System.out.print("Edit command: 2 \n");
         	System.out.print("Delete: 3 \n");
         	System.out.print("Sort by first name: 4 \n");
+        	System.out.print("Sort by City command: 5 \n");
         	command = addressBook.sc.nextInt();
         	
         	switch(command) {
@@ -52,6 +53,10 @@ public class AddressBook {
         	  case 4:
         		  System.out.print("Sorted list by first name: ");
         		  System.out.println(addressBook.sortByFirstName());
+          	    break;
+        	  case 5:
+        		  System.out.print("Sorted list by City: ");
+        		  System.out.println(addressBook.sortByCity());
           	    break;
         	 
         	  default:
@@ -135,6 +140,11 @@ public class AddressBook {
 	 public List<Person> sortByFirstName() {
 			List<Person> sortedPersonList = this.personList;
 			sortedPersonList.sort(Comparator.comparing(Person::getFirstName));		
+			return sortedPersonList;
+		}
+	 public List<Person> sortByCity() {
+			List<Person> sortedPersonList = this.personList;
+			sortedPersonList.sort(Comparator.comparing(Person::getCity));
 			return sortedPersonList;
 		}
 
