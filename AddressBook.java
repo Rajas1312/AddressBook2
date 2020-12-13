@@ -11,6 +11,7 @@ public class AddressBook {
 	public static void main(String[] args) {
 		System.out.println("Welcome to address book ");
 		AddressBook addressBook=new AddressBook();
+		int command;
 		Person person = new Person("Sagar","Maharaj","Mumbai","MH","40051","989"); 
         addressBook.personList.add(person);
         person = new Person("Rajas","Dongre","Mumbai","MH","40051","989");
@@ -23,9 +24,55 @@ public class AddressBook {
         addressBook.personList.add(person);
         person = new Person("Uzair","Chhapra","Thane","MH","40051","989"); 
         addressBook.personList.add(person);
-        System.out.println(addressBook.personList);
+        
+        do {
+        	System.out.print("Enter command: \n");
+        	System.out.print("Exit : 0 \n");
+        	System.out.print("Add command: 1 \n");
+        	command = addressBook.sc.nextInt();
+        	
+        	switch(command) {
+        	  case 1:
+        		  addressBook.sc.nextLine();
+        		  addressBook.addPerson();
+        	    break;
+        	 
+        	  default:
+        		  System.out.print("Wrong Command!! ");
+        	    
+        	}
+        	
+        }while(command != 0);
 
 	}
+	
+	public boolean personExistsCheckByFirstName (String firstName) {		
+		return this.personList.stream().anyMatch(Person -> Person.equals(firstName));
+	}
+	
+	public void addPerson () {
+
+		  System.out.println("Enter first name:");
+		  String firstName = sc.nextLine(); 
+	      if (!this.personExistsCheckByFirstName(firstName)) {  
+	    	  System.out.print("Enter last name:");
+	          String lastName = sc.nextLine();
+	          System.out.print("Enter city:");
+	          String city = sc.nextLine();
+	          System.out.print("Enter state:");
+	          String state = sc.nextLine();
+	          System.out.print("Enter zip:");
+	          String zip = sc.nextLine();
+	          System.out.print("Enter phoennumber:");
+	          String phone = sc.nextLine();
+	          Person person=new Person(firstName,lastName,city,state,zip,phone);
+	          this.personList.add(person);
+	      }
+	      else {
+	    	  System.out.println("Person with first name : "+firstName+" already exists.");
+	      }
+	 
+		}
 
 }
 class Person{
@@ -99,6 +146,25 @@ class Person{
 	public String toString() {
 		return "[firstName=" + firstName + ", lastName=" + lastName + ", city=" + city + ", state=" + state
 				+ ", zip=" + zip + ", phone=" + phone + "]\n";
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+				
+		if (o == this) { 
+            return true; 
+        } 
+        
+        if (!(o instanceof String)) { 
+            return false; 
+        } 
+        
+        String firstName = (String)o;
+        
+		if (this.firstName.equals(firstName))
+			return true;
+		else 
+			return false;
 	}
 	
 }
