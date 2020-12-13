@@ -37,6 +37,7 @@ public class AddressBook {
         	System.out.print("Sort by City command: 5 \n");
         	System.out.print("Find all Person by City command: 6 \n");
         	System.out.print("Find all Person by City and State command: 7 \n");
+        	System.out.print("Display all Person command: 8 \n");
         	command = addressBook.sc.nextInt();
         	
         	switch(command) {
@@ -73,6 +74,11 @@ public class AddressBook {
         		  System.out.print("Enter State");
         		  String state = addressBook.sc.nextLine();
         		  System.out.println(addressBook.findByCityAndState(city, state));   
+          	    break; 
+        	  case 8:
+        		  System.out.print("All Persons: ");
+        		  System.out.println(addressBook.personList);
+        		  
           	    break; 
         	 
         	  default:
