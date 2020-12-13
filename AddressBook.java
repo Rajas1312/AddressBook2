@@ -36,6 +36,7 @@ public class AddressBook {
         	System.out.print("Sort by first name: 4 \n");
         	System.out.print("Sort by City command: 5 \n");
         	System.out.print("Find all Person by City command: 6 \n");
+        	System.out.print("Find all Person by City and State command: 7 \n");
         	command = addressBook.sc.nextInt();
         	
         	switch(command) {
@@ -65,6 +66,14 @@ public class AddressBook {
         		  System.out.print("Enter city name: ");        		  
         		  System.out.println(addressBook.findByCity(addressBook.sc.nextLine()));
           	    break;
+        	  case 7:
+        		  addressBook.sc.nextLine();
+        		  System.out.print("Enter City");
+        		  String city = addressBook.sc.nextLine();
+        		  System.out.print("Enter State");
+        		  String state = addressBook.sc.nextLine();
+        		  System.out.println(addressBook.findByCityAndState(city, state));   
+          	    break; 
         	 
         	  default:
         		  System.out.print("Wrong Command!! ");
@@ -158,6 +167,13 @@ public class AddressBook {
 	 public List<Person> findByCity(String city) {
 			List<Person> matchedPersonList = this.personList.stream().
 		    	    filter(p -> p.getCity().equals(city)).
+		    	    collect(Collectors.toList());
+			
+			return matchedPersonList;
+		}
+	 public List<Person> findByCityAndState(String city,String state) {
+			List<Person> matchedPersonList = this.personList.stream().
+		    	    filter(p -> p.getCity().equals(city) && p.getState().equals(state)).
 		    	    collect(Collectors.toList());
 			
 			return matchedPersonList;
