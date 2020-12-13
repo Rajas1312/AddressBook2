@@ -30,6 +30,7 @@ public class AddressBook {
         	System.out.print("Exit : 0 \n");
         	System.out.print("Add command: 1 \n");
         	System.out.print("Edit command: 2 \n");
+        	System.out.print("Delete: 3 \n");
         	command = addressBook.sc.nextInt();
         	
         	switch(command) {
@@ -41,6 +42,11 @@ public class AddressBook {
         		  addressBook.sc.nextLine();
         		  addressBook.editPerson();        		  
         	    break;
+        	  case 3:
+        		  addressBook.sc.nextLine();
+        		  System.out.print("Enter first name to delete");
+        		  addressBook.deletePersonFirstName(addressBook.sc.nextLine());
+          	    break;
         	 
         	  default:
         		  System.out.print("Wrong Command!! ");
@@ -115,6 +121,10 @@ public class AddressBook {
 	      }
 
 	}
+	 
+	 public void deletePersonFirstName (String firstName) {
+			this.personList.removeIf(Person -> Person.equals(firstName));
+		}
 
 
 }
