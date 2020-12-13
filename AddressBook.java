@@ -29,12 +29,17 @@ public class AddressBook {
         	System.out.print("Enter command: \n");
         	System.out.print("Exit : 0 \n");
         	System.out.print("Add command: 1 \n");
+        	System.out.print("Edit command: 2 \n");
         	command = addressBook.sc.nextInt();
         	
         	switch(command) {
         	  case 1:
         		  addressBook.sc.nextLine();
         		  addressBook.addPerson();
+        	    break;    
+        	  case 2:
+        		  addressBook.sc.nextLine();
+        		  addressBook.editPerson();        		  
         	    break;
         	 
         	  default:
@@ -70,9 +75,47 @@ public class AddressBook {
 	      }
 	      else {
 	    	  System.out.println("Person with first name : "+firstName+" already exists.");
+	      }  
+	}
+	
+	public Person getPersonByFirstName (String firstName) {
+		return this.personList.stream().filter(Person -> Person.equals(firstName)).findFirst().get();
+	}
+	
+	 public void editPerson () {
+
+		  System.out.println("Enter first name:");
+		  String firstName = sc.nextLine(); 
+	      if (this.personExistsCheckByFirstName(firstName)) {  
+	    	  Person editPerson = this.getPersonByFirstName(firstName);
+	    	  System.out.print("Enter last name:");
+	          String lastName = sc.nextLine();
+	          editPerson.setLastName(lastName);
+	          
+	          System.out.print("Enter city:");
+	          String city = sc.nextLine();
+	          editPerson.setCity(city);
+	          
+	          System.out.print("Enter state:");
+	          String state = sc.nextLine();
+	          editPerson.setState(state);
+	          
+	          System.out.print("Enter zip:");
+	          String zip = sc.nextLine();
+	          editPerson.setZip(zip);
+	          
+	          System.out.print("Enter phoennumber:");
+	          String phone = sc.nextLine();
+	          editPerson.setPhone(phone);
+	          
+	          System.out.println("Edited person : " + editPerson);
 	      }
-	 
-		}
+	      else {
+	    	  System.out.println("Person with first name : "+firstName+" does not exists.");
+	      }
+
+	}
+
 
 }
 class Person{
