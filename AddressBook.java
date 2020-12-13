@@ -1,6 +1,7 @@
 package addressbook;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -31,6 +32,7 @@ public class AddressBook {
         	System.out.print("Add command: 1 \n");
         	System.out.print("Edit command: 2 \n");
         	System.out.print("Delete: 3 \n");
+        	System.out.print("Sort by first name: 4 \n");
         	command = addressBook.sc.nextInt();
         	
         	switch(command) {
@@ -46,6 +48,10 @@ public class AddressBook {
         		  addressBook.sc.nextLine();
         		  System.out.print("Enter first name to delete");
         		  addressBook.deletePersonFirstName(addressBook.sc.nextLine());
+          	    break;
+        	  case 4:
+        		  System.out.print("Sorted list by first name: ");
+        		  System.out.println(addressBook.sortByFirstName());
           	    break;
         	 
         	  default:
@@ -124,6 +130,12 @@ public class AddressBook {
 	 
 	 public void deletePersonFirstName (String firstName) {
 			this.personList.removeIf(Person -> Person.equals(firstName));
+		}
+	 
+	 public List<Person> sortByFirstName() {
+			List<Person> sortedPersonList = this.personList;
+			sortedPersonList.sort(Comparator.comparing(Person::getFirstName));		
+			return sortedPersonList;
 		}
 
 
