@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class AddressBook {
 
@@ -34,6 +35,7 @@ public class AddressBook {
         	System.out.print("Delete: 3 \n");
         	System.out.print("Sort by first name: 4 \n");
         	System.out.print("Sort by City command: 5 \n");
+        	System.out.print("Find all Person by City command: 6 \n");
         	command = addressBook.sc.nextInt();
         	
         	switch(command) {
@@ -57,6 +59,11 @@ public class AddressBook {
         	  case 5:
         		  System.out.print("Sorted list by City: ");
         		  System.out.println(addressBook.sortByCity());
+          	    break;
+        	  case 6:
+        		  addressBook.sc.nextLine();
+        		  System.out.print("Enter city name: ");        		  
+        		  System.out.println(addressBook.findByCity(addressBook.sc.nextLine()));
           	    break;
         	 
         	  default:
@@ -148,6 +155,13 @@ public class AddressBook {
 			return sortedPersonList;
 		}
 
+	 public List<Person> findByCity(String city) {
+			List<Person> matchedPersonList = this.personList.stream().
+		    	    filter(p -> p.getCity().equals(city)).
+		    	    collect(Collectors.toList());
+			
+			return matchedPersonList;
+		}
 
 }
 class Person{
